@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const functionProblems = require('./models/functions');
 require('dotenv').config();
 
+const ProblemRouter = require('./routes/problems');
 
 const app = express();
 app.use(cors())
@@ -19,7 +20,4 @@ app.listen(PORT, () => {
     console.log(`listening on ${PORT}`)
 });
 
-app.get('/api/practice/math/functions', async (req: Express.Request, res: Express.Response) => {
-   const result = await functionProblems.find();
-   res.send({"problems": result}) 
-});
+app.use("/api/problems", ProblemRouter);
